@@ -298,9 +298,15 @@ curl http://localhost:8080/actuator/health
 - **Body ejemplo:**
   ```json
   {
-    "estudianteId": "ID_ESTUDIANTE",
-    "cursoId": "ID_CURSO",
-    "fecha": "2024-08-15"
+    "estudiante": {
+        "id": "689e4252e4d37407a79cd9ee"
+    },
+    "cursos": [
+        {
+            "id": "689e8467fd811545a3c4c79c"
+        }
+    ],
+    "fechaMatricula": "2024-08-15"
   }
   ```
 - **Curl:**
