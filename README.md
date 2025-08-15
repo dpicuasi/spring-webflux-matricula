@@ -104,7 +104,7 @@ curl http://localhost:8080/actuator/health
     {
       "nombre": "Ciencias Naturales",
       "siglas": "MAT101",
-      "creditos": 4
+      "estado": true
     }
     ```
 - **Curl:**
@@ -115,7 +115,7 @@ curl http://localhost:8080/actuator/health
     -d '{
       "nombre": "Ciencias Naturales",
       "siglas": "MAT101",
-      "creditos": 4
+      "estado": true
     }'
   ```
 
@@ -289,7 +289,13 @@ curl http://localhost:8080/actuator/health
   curl -X POST http://localhost:8080/api/matriculas \
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
-    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-14"}'
+    -d '{
+      "estudiante": { "id": "689e4252e4d37407a79cd9ee" },
+      "cursos": [
+        { "id": "689e8467fd811545a3c4c79c" }
+      ],
+      "fechaMatricula": "2024-08-14"
+    }'
   ```
 
 #### PUT `/api/matriculas/{id}`
@@ -314,7 +320,13 @@ curl http://localhost:8080/actuator/health
   curl -X PUT http://localhost:8080/api/matriculas/ID_MATRICULA \
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
-    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-15"}'
+    -d '{
+      "estudiante": { "id": "689e4252e4d37407a79cd9ee" },
+      "cursos": [
+        { "id": "689e8467fd811545a3c4c79c" }
+      ],
+      "fechaMatricula": "2024-08-15"
+    }'
   ```
 
 #### DELETE `/api/matriculas/{id}`

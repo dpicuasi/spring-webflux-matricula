@@ -7,5 +7,5 @@ public class CursoDTO {
     private String id;
     private String nombre;
     private String siglas;
-    private Integer creditos;
+    private boolean estado;
 }
