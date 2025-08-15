@@ -6,6 +6,6 @@ import lombok.Data;
 public class CursoDTO {
     private String id;
     private String nombre;
-    private String sigla;
+    private String siglas;
     private Integer creditos;
 }

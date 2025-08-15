@@ -78,70 +78,75 @@ curl http://localhost:8080/actuator/health
 
 ---
 
-### Matrículas
+### Cursos
 
-#### GET `/api/matriculas`
-- **Descripción:** Lista todas las matrículas
-- **URL completa:** `http://localhost:8080/api/matriculas`
+#### GET `/api/v2/cursos`
+- **Descripción:** Lista todos los cursos
+- **URL completa:** `http://localhost:8080/api/v2/cursos`
 - **Curl:**
   ```bash
-  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/matriculas
+  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/v2/cursos
   ```
 
-#### GET `/api/matriculas/{id}`
-- **Descripción:** Obtiene una matrícula por ID
-- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
+#### GET `/api/v2/cursos/{id}`
+- **Descripción:** Obtiene curso por ID
+- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
 - **Curl:**
   ```bash
-  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/matriculas/ID_MATRICULA
+  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/v2/cursos/ID_CURSO
   ```
 
-#### POST `/api/matriculas`
-- **Descripción:** Crea una nueva matrícula
-- **URL completa:** `http://localhost:8080/api/matriculas`
+#### POST `/api/v2/cursos`
+- **Descripción:** Crea nuevo curso
+- **URL completa:** `http://localhost:8080/api/v2/cursos`
+  - **Body ejemplo:**
+    ```json
+    {
+      "nombre": "Ciencias Naturales",
+      "sigla": "CN",
+      "creditos": 4
+    }
+    ```
+- **Curl:**
+  ```bash
+  curl -X POST http://localhost:8080/api/v2/cursos \
+    -H "Authorization: Bearer <jwt-token>" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "nombre": "Ciencias Naturales",
+      "sigla": "CN",
+      "creditos": 4
+    }'
+  ```
+
+#### PUT `/api/v2/cursos/{id}`
+- **Descripción:** Actualiza curso
+- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
 - **Body ejemplo:**
   ```json
   {
-    "estudianteId": "ID_ESTUDIANTE",
-    "cursoId": "ID_CURSO",
-    "fecha": "2024-08-14"
+    "nombre": "Matemáticas Avanzadas",
+    "descripcion": "Curso avanzado"
   }
   ```
 - **Curl:**
   ```bash
-  curl -X POST http://localhost:8080/api/matriculas \
+  curl -X PUT http://localhost:8080/api/v2/cursos/ID_CURSO \
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
-    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-14"}'
+    -d '{"nombre":"Matemáticas Avanzadas","descripcion":"Curso avanzado"}'
   ```
 
-#### PUT `/api/matriculas/{id}`
-- **Descripción:** Actualiza una matrícula existente
-- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
-- **Body ejemplo:**
-  ```json
-  {
-    "estudianteId": "ID_ESTUDIANTE",
-    "cursoId": "ID_CURSO",
-    "fecha": "2024-08-15"
-  }
-  ```
+#### DELETE `/api/v2/cursos/{id}`
+- **Descripción:** Elimina curso
+- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
 - **Curl:**
   ```bash
-  curl -X PUT http://localhost:8080/api/matriculas/ID_MATRICULA \
-    -H "Authorization: Bearer <jwt-token>" \
-    -H "Content-Type: application/json" \
-    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-15"}'
-  ```
-
-#### DELETE `/api/matriculas/{id}`
-- **Descripción:** Elimina una matrícula
-- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
-- **Curl:**
-  ```bash
-  curl -X DELETE http://localhost:8080/api/matriculas/ID_MATRICULA \
+  curl -X DELETE http://localhost:8080/api/v2/cursos/ID_CURSO \
     -H "Authorization: Bearer <jwt-token>"
   ```
+
+#### (API funcional) `/api/cursos` (mismos ejemplos que REST clásico, solo cambia la ruta)
 
 ---
 
@@ -244,76 +249,70 @@ curl http://localhost:8080/actuator/health
 
 ---
 
-### Cursos
+### Matrículas
 
-#### GET `/api/v2/cursos`
-- **Descripción:** Lista todos los cursos
-- **URL completa:** `http://localhost:8080/api/v2/cursos`
+#### GET `/api/matriculas`
+- **Descripción:** Lista todas las matrículas
+- **URL completa:** `http://localhost:8080/api/matriculas`
 - **Curl:**
   ```bash
-  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/v2/cursos
+  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/matriculas
   ```
 
-#### GET `/api/v2/cursos/{id}`
-- **Descripción:** Obtiene curso por ID
-- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
+#### GET `/api/matriculas/{id}`
+- **Descripción:** Obtiene una matrícula por ID
+- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
 - **Curl:**
   ```bash
-  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/v2/cursos/ID_CURSO
+  curl -H "Authorization: Bearer <jwt-token>" http://localhost:8080/api/matriculas/ID_MATRICULA
   ```
 
-#### POST `/api/v2/cursos`
-- **Descripción:** Crea nuevo curso
-- **URL completa:** `http://localhost:8080/api/v2/cursos`
-  - **Body ejemplo:**
-    ```json
-    {
-      "nombre": "Ciencias Naturales",
-      "sigla": "CN",
-      "creditos": 4
-    }
-    ```
-- **Curl:**
-  ```bash
-  curl -X POST http://localhost:8080/api/v2/cursos \
-    -H "Authorization: Bearer <jwt-token>" \
-    -H "Content-Type: application/json" \
-    -d '{
-      "nombre": "Ciencias Naturales",
-      "sigla": "CN",
-      "creditos": 4
-    }'
-  ```
-
-#### PUT `/api/v2/cursos/{id}`
-- **Descripción:** Actualiza curso
-- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
+#### POST `/api/matriculas`
+- **Descripción:** Crea una nueva matrícula
+- **URL completa:** `http://localhost:8080/api/matriculas`
 - **Body ejemplo:**
   ```json
   {
-    "nombre": "Matemáticas Avanzadas",
-    "descripcion": "Curso avanzado"
+    "estudianteId": "ID_ESTUDIANTE",
+    "cursoId": "ID_CURSO",
+    "fecha": "2024-08-14"
   }
   ```
 - **Curl:**
   ```bash
-  curl -X PUT http://localhost:8080/api/v2/cursos/ID_CURSO \
+  curl -X POST http://localhost:8080/api/matriculas \
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
-    -d '{"nombre":"Matemáticas Avanzadas","descripcion":"Curso avanzado"}'
+    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-14"}'
   ```
 
-#### DELETE `/api/v2/cursos/{id}`
-- **Descripción:** Elimina curso
-- **URL completa:** `http://localhost:8080/api/v2/cursos/ID_CURSO`
+#### PUT `/api/matriculas/{id}`
+- **Descripción:** Actualiza una matrícula existente
+- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
+- **Body ejemplo:**
+  ```json
+  {
+    "estudianteId": "ID_ESTUDIANTE",
+    "cursoId": "ID_CURSO",
+    "fecha": "2024-08-15"
+  }
+  ```
 - **Curl:**
   ```bash
-  curl -X DELETE http://localhost:8080/api/v2/cursos/ID_CURSO \
-    -H "Authorization: Bearer <jwt-token>"
+  curl -X PUT http://localhost:8080/api/matriculas/ID_MATRICULA \
+    -H "Authorization: Bearer <jwt-token>" \
+    -H "Content-Type: application/json" \
+    -d '{"estudianteId":"ID_ESTUDIANTE","cursoId":"ID_CURSO","fecha":"2024-08-15"}'
   ```
 
-#### (API funcional) `/api/cursos` (mismos ejemplos que REST clásico, solo cambia la ruta)
-
+#### DELETE `/api/matriculas/{id}`
+- **Descripción:** Elimina una matrícula
+- **URL completa:** `http://localhost:8080/api/matriculas/ID_MATRICULA`
+- **Curl:**
+  ```bash
+  curl -X DELETE http://localhost:8080/api/matriculas/ID_MATRICULA \
+    -H "Authorization: Bearer <jwt-token>"
+  ```
 ---
 
 > **Nota:** Todos los endpoints (excepto `/login`) requieren autenticación JWT en el header `Authorization`. Puedes obtener el token usando el endpoint de login.
