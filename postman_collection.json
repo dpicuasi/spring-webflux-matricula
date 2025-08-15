@@ -23,7 +23,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\": \"Estudios Sociales\",\n    \"siglas\": \"ES\",\n    \"creditos\": 20\n  }",
+					"raw": "{\n    \"nombre\": \"Estudios Sociales\",\n    \"siglas\": \"ES\",\n    \"estado\": true\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,7 +83,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/v2/cursos/689e8467fd811545a3c4c79c",
+					"raw": "http://localhost:8080/api/v2/cursos/689ec62ccc65ef16d1aea906",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -93,7 +93,7 @@
 						"api",
 						"v2",
 						"cursos",
-						"689e8467fd811545a3c4c79c"
+						"689ec62ccc65ef16d1aea906"
 					]
 				}
 			},
@@ -463,7 +463,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"estudiante\": {\r\n        \"id\": \"689e4252e4d37407a79cd9ee\"\r\n    },\r\n    \"cursos\": [\r\n        {\r\n            \"id\": \"689e8467fd811545a3c4c79c\"\r\n        }\r\n    ],\r\n    \"fechaMatricula\": \"2024-08-14\"\r\n}",
+					"raw": "{\r\n    \"estudiante\": {\r\n        \"id\": \"689ec73dcc65ef16d1aea907\"\r\n    },\r\n    \"cursos\": [\r\n        {\r\n            \"id\": \"689ec62ccc65ef16d1aea906\"\r\n        }\r\n    ],\r\n    \"fechaMatricula\": \"2024-08-15\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -546,6 +546,45 @@
 						"api",
 						"matriculas",
 						"689ebcca1a416059249f773b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear-estudiante",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3NTUyNzIxMzUsImlhdCI6MTc1NTIzNjEzNX0.ybBks79uzRFLpAG7d3_1auoaRAQ3xcrw3dHB2Gv3sIc"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombres\": \"Juan\",\n    \"apellidos\": \"Pérez\",\n    \"dni\": \"12345678\",\n    \"edad\": 22\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v2/estudiantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v2",
+						"estudiantes"
 					]
 				}
 			},
