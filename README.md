@@ -103,7 +103,7 @@ curl http://localhost:8080/actuator/health
     ```json
     {
       "nombre": "Ciencias Naturales",
-      "sigla": "CN",
+      "siglas": "MAT101",
       "creditos": 4
     }
     ```
@@ -114,7 +114,7 @@ curl http://localhost:8080/actuator/health
     -H "Content-Type: application/json" \
     -d '{
       "nombre": "Ciencias Naturales",
-      "sigla": "CN",
+      "siglas": "MAT101",
       "creditos": 4
     }'
   ```
@@ -273,9 +273,15 @@ curl http://localhost:8080/actuator/health
 - **Body ejemplo:**
   ```json
   {
-    "estudianteId": "ID_ESTUDIANTE",
-    "cursoId": "ID_CURSO",
-    "fecha": "2024-08-14"
+    "estudiante": {
+        "id": "689e4252e4d37407a79cd9ee"
+    },
+    "cursos": [
+        {
+            "id": "689e8467fd811545a3c4c79c"
+        }
+    ],
+    "fechaMatricula": "2024-08-14"
   }
   ```
 - **Curl:**
