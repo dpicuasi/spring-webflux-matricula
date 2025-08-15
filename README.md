@@ -185,7 +185,6 @@ curl http://localhost:8080/actuator/health
   - **Body ejemplo:**
     ```json
     {
-      "id": "",
       "nombres": "Juan",
       "apellidos": "Pérez",
       "dni": "12345678",
@@ -198,7 +197,6 @@ curl http://localhost:8080/actuator/health
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
     -d '{
-      "id": "",
       "nombres": "Juan",
       "apellidos": "Pérez",
       "dni": "12345678",
@@ -267,24 +265,22 @@ curl http://localhost:8080/actuator/health
 #### POST `/api/v2/cursos`
 - **Descripción:** Crea nuevo curso
 - **URL completa:** `http://localhost:8080/api/v2/cursos`
-- **Body ejemplo:**
-  ```json
-  {
-    "id": "",
-    "nombre": "Matemáticas",
-    "sigla": "MAT101",
-    "creditos": 4
-  }
-  ```
+  - **Body ejemplo:**
+    ```json
+    {
+      "nombre": "Ciencias Naturales",
+      "sigla": "CN",
+      "creditos": 4
+    }
+    ```
 - **Curl:**
   ```bash
   curl -X POST http://localhost:8080/api/v2/cursos \
     -H "Authorization: Bearer <jwt-token>" \
     -H "Content-Type: application/json" \
     -d '{
-      "id": "",
-      "nombre": "Matemáticas",
-      "sigla": "MAT101",
+      "nombre": "Ciencias Naturales",
+      "sigla": "CN",
       "creditos": 4
     }'
   ```
