@@ -23,25 +23,45 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) {
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
+        String principal = authentication.getPrincipal().toString();
+        String credentials = authentication.getCredentials().toString();
 
-        return userRepo.findOneByUsername(username)
+        // Si las credenciales parecen un JWT, validar token (para endpoints protegidos)
+        if (credentials != null && credentials.split("\\.").length == 3) {
+            String usernameFromToken = jwtUtil.extractUsername(credentials);
+            if (usernameFromToken == null || !usernameFromToken.equals(principal) || jwtUtil.extractExpiration(credentials).before(new java.util.Date())) {
+                return Mono.error(new BadCredentialsException("Token JWT inválido o expirado"));
+            }
+            // Extraer roles del token (pueden estar como String separados por coma)
+            Object rolesObj = jwtUtil.extractClaim(credentials, claims -> claims.get("roles"));
+            java.util.List<GrantedAuthority> authorities = new java.util.ArrayList<>();
+            if (rolesObj instanceof String rolesStr) {
+                for (String role : rolesStr.split(",")) {
+                    authorities.add(new SimpleGrantedAuthority(role.trim()));
+                }
+            }
+            return Mono.just(new UsernamePasswordAuthenticationToken(principal, null, authorities));
+        }
+        // Si no es JWT, es login clásico: validar usuario/contraseña
+        return userRepo.findOneByUsername(principal)
                 .switchIfEmpty(Mono.error(new UsernameNotFoundException("Usuario no encontrado")))
                 .flatMap(user -> {
                     if (!user.isEnabled()) {
                         return Mono.error(new BadCredentialsException("Usuario deshabilitado"));
                     }
-                    if (!user.getPassword().equals(password)) {
+                    // Validar password con BCrypt
+                    if (!org.springframework.security.crypto.bcrypt.BCrypt.checkpw(credentials, user.getPassword())) {
                         return Mono.error(new BadCredentialsException("Credenciales inválidas"));
                     }
-                    List<GrantedAuthority> authorities = user.getRoles().stream()
+                    java.util.List<GrantedAuthority> authorities = user.getRoles().stream()
                             .map(role -> new SimpleGrantedAuthority(role.getName()))
                             .collect(Collectors.toList());
-                    return Mono.just(new UsernamePasswordAuthenticationToken(username, password, authorities));
+                    return Mono.just(new UsernamePasswordAuthenticationToken(principal, null, authorities));
                 });
     }
 }
